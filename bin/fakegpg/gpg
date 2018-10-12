@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+STDERR.puts "fakegpg #{ARGV.to_a.join(' ')}"
+if ARGV.include? '-o' or ARGV.include? '--output'
+  argv = ARGV.to_a
+  raise "Can't handle more than one output" if argv.count { |x| x == '-o' || x == '--output' } > 1
+  idx = argv.find_index { |x| x == '-o' || x == '--output' }
+  argv.delete_at(idx)
+  filename = argv.delete_at(idx)
+  system('/mnt/c/Program\ Files\ \(x86\)/GnuPG/bin/gpg.exe ' + argv.join(' ') + ' >' + filename)
+elsif File.exist? ARGV.last
+  system('/mnt/c/Program\ Files\ \(x86\)/GnuPG/bin/gpg.exe ' + ARGV[0, ARGV.size - 2].to_a.join(' ') + ' <' + ARGV.last)
+else
+  system('/mnt/c/Program\ Files\ \(x86\)/GnuPG/bin/gpg.exe ' + ARGV.to_a.join(' '))
+end
