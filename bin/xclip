@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+if ARGV.include? '-o'
+  system('win32yank -o --lf')
+else
+  system('win32yank -i --crlf')
+end
