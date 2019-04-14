@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 
+bin = "$(realpath $(which win32yank))"
 if ARGV.include? '-o'
-  system('win32yank -o --lf')
+  system("#{bin} -o --lf")
 else
-  system('win32yank -i --crlf')
+  system("#{bin} -i --crlf")
 end
